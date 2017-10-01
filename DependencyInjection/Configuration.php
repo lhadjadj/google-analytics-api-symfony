@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaFigaro\GoogleAnalyticsApi\DependencyInjection;
+namespace LHadjadj\GoogleAnalyticsApi\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
