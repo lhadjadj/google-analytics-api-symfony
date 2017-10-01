@@ -8,10 +8,10 @@ La version présente ajoute les élements suivants :
 * Support Symfony 3 + php 7.0 ;
 * Ajout du support des dimensions (1 max) ;
 * Ajout d'une class pour le chargement des données pour un jour ou sur un intervalle (mode batch) ;
-* Enregistremennt des données dans une base de données (ici, mongoDB) 
+* Enregistremennt des données dans une base de données (ici, mongoDB) ;
 
  
-** Cette version s'appuie sur l'API Google et le bundle mediafigaro/google-analytics-api-symfony. **
+**Cette version s'appuie sur l'API Google et le bundle mediafigaro/google-analytics-api-symfony.**
 
 # Utilisation
 
@@ -28,16 +28,16 @@ obtenir la clé json, puis configurer ce paquet en définissant son chemin.
 Google Console pour Google Analytics est disponible à l'adresse :
 https://console.developers.google.com/apis/
 
-Une fois connecté, il suffit de cliquer sur ** identifiants ** puis sur le bouton ** créer des identifiants ** :
+Une fois connecté, il suffit de cliquer sur **identifiants** puis sur le bouton **créer des identifiants** :
 ![identifiants](doc/API-Google-000.jpg)
 
 Il faut choisir un compte de service :
 ![creer-un-compte-de-service](doc/API-Google-001.jpg)
 
 Il faut tout d'abord choisir l'option ** Nouveau compte de service ** et définir le compte. Ici, nous avons
-choisi comme nom : ** stats **
+choisi comme nom : **stats**
 
-Nous avons choisi comme role le profile ** Role viewer ** 
+Nous avons choisi comme role le profile **Role viewer** 
 
 L'Id du compte de service est ajouté automatiquement. Il correspond à l'adresse qu'il faudra utiliser dans Google Analytics.
 
@@ -52,7 +52,7 @@ Le fichier est téléchargée.
 Le compte de service est créé.
 ![compte-de-service](doc/API-Google-004.jpg)
 
-Une fois cette opération terminée, il faudra ** activer ** le service pour pouvoir l'utiliser depuis GA.
+Une fois cette opération terminée, il faudra **activer** le service pour pouvoir l'utiliser depuis GA.
 ![dashboard](doc/API-Google-005.jpg)
  
 ## Google Analytics 
@@ -64,14 +64,14 @@ Pour que l'accès déclaré dans Google Console fonctionne, il est obligatoire d
 l'accès avec l'adresse du compte de service. Pour cela, il suffit de cliquer sur le bouton ** Administration **
 ![administration](doc/API-Google-006.jpg)
 
-et sur ** Gestion des utilisateurs ** pour ajouter une nouvelle autorisation.
+et sur **Gestion des utilisateurs** pour ajouter une nouvelle autorisation.
 ![gestion-des-utilisateurs](doc/API-Google-007.jpg)
 
-Dans la zone ** Ajouter des autorisations pour ** ajoutez l'adresse créée dans Google Console :
+Dans la zone **Ajouter des autorisations pour** ajoutez l'adresse créée dans Google Console :
 stats-611@med.iam.gserviceaccount.com (ie. dans notre exemple).
 ![autoriser-une-adresse](doc/API-Google-008.jpg)
 
-Pour vérifier si l'accès est correct, l'URL suivante permettra de tester le profil (ex id: 111111111):
+Pour vérifier si l'accès est correct, il suffit de saisir l'URL suivante avec le numéro de profil (ex id: 111111111):
 
 http://symfony.dev/app_dev.php/analytics-api/111111111 
 
@@ -96,11 +96,22 @@ Puis il faut ajouter la réference du bundle dans /app/AppKernel.php :
 
     google_analytics_api.google_analytics_json_key
 
-Set the relative path for your json key (set it on your server, better not into your repository) from execution path, ex: /data/analytics/analytics-27cef1a4c0fd.json.
+Il est recommandé d'enregistrer la clée dans un dossier inaccessible, 
+par exemple dans le dossier app/data. C'est le fichier qui a été 
+généré depuis Google Console, il est de la forme **auth-27cef1a4c0fd.json**
 
-/app/config/parameters.yml
+Ensuite, il faut ajouter le chemin de la clée dans le fichier **parameters.yml** 
+et **parameters.yml.dist** 
 
-    google_analytics_json_key: "../data/analytics/analytics-27cef1a4c0fd.json"
+/app/config/parameters.yml et /app/config/parameters.yml.dist
+
+    google_analytics_json_key: "../app/data/auth-27cef1a4c0fd.json"
+    google_analytics_view_id: '123456789'
+
+Vous pouvez trouver l'Id sur la page cette page : https://ga-dev-tools.appspot.com/account-explorer/
+Il faut trouver le paramètre **view** ou **table id** (sans ga:). 
+
+Et dans le fichier **config.yml**.
 
 /app/config/config.yml
 
@@ -109,7 +120,7 @@ Set the relative path for your json key (set it on your server, better not into 
         
 # Google API key
 
-Generate the json file from https://console.developers.google.com/start/api?id=analyticsreporting.googleapis.com&credential=client_key by creating a project, check the documentation : https://developers.google.com/analytics/devguides/reporting/core/v4/quickstart/service-php.
+Le clé
 
 # Google Analytics API v4
 
