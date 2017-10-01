@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaFigaro\GoogleAnalyticsApi;
+namespace LHadjadj\GoogleAnalyticsApi;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

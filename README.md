@@ -1,39 +1,95 @@
 Google Analytics API v4 Symfony bundle
 ======================================
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/da6423cf-b198-402a-8d23-e82e7833f9f6/big.png)](https://insight.sensiolabs.com/projects/da6423cf-b198-402a-8d23-e82e7833f9f6)
+Ceci est un fork du bundle mediafigaro/google-analytics-symfony en version 1.0. 
+La documenttaion du bundle est disponible à l'adresse : https://mediafigaro.github.io
 
-[![Latest Stable Version](https://poser.pugx.org/mediafigaro/google-analytics-api-symfony/v/stable)](https://packagist.org/packages/mediafigaro/google-analytics-api-symfony)
-[![Total Downloads](https://poser.pugx.org/mediafigaro/google-analytics-api-symfony/downloads)](https://packagist.org/packages/mediafigaro/google-analytics-api-symfony)
-[![Latest Unstable Version](https://poser.pugx.org/mediafigaro/google-analytics-api-symfony/v/unstable)](https://packagist.org/packages/mediafigaro/google-analytics-api-symfony)
-[![License](https://poser.pugx.org/mediafigaro/google-analytics-api-symfony/license)](https://packagist.org/packages/mediafigaro/google-analytics-api-symfony)
-[![Monthly Downloads](https://poser.pugx.org/mediafigaro/google-analytics-api-symfony/d/monthly)](https://packagist.org/packages/mediafigaro/google-analytics-api-symfony)
-[![Daily Downloads](https://poser.pugx.org/mediafigaro/google-analytics-api-symfony/d/daily)](https://packagist.org/packages/mediafigaro/google-analytics-api-symfony)
-[![composer.lock](https://poser.pugx.org/mediafigaro/google-analytics-api-symfony/composerlock)](https://packagist.org/packages/mediafigaro/google-analytics-api-symfony)
+La version présente ajoute les élements suivants :
+* Support Symfony 3 + php 7.0 ;
+* Ajout du support des dimensions (1 max) ;
+* Ajout d'une class pour le chargement des données pour un jour ou sur un intervalle (mode batch) ;
+* Enregistremennt des données dans une base de données (ici, mongoDB) 
 
-# use
+ 
+** Cette version s'appuie sur l'API Google et le bundle mediafigaro/google-analytics-api-symfony. **
 
-At MEDIA.figaro http://media.figaro.fr, the advertising department of the french newspaper Le Figaro and part of the Figaro Group (CCM Benchmark), we use this bundle to monitor our digital platforms with Google Analytics. 
+# Utilisation
 
-It's a simple package that wraps the Google Analytics API version 4, and that gives you all the information to go straight to the point of getting some main metrics from GA.
+Ce bundle a été conçu par la division média du magazine Le Figaro http://media.figaro.fr, 
+il permet la récupération des métriques issus de la plateforme Google Analytics. 
 
-To be able to use it, you have to setup a project on Google Console for Google Analytics, get the json key, then configure this package by setting the path for it. You'll have to add the developer email defined into the Google Console to the GA views to authorize it, otherwise the view won't be accessible through the API. 
+Il permet un accès simple à l'API Google Analytics API 4 et aux principaux paramètres GA.
 
-You can use the debug routes to go live and test a profile (ex id : 111111111, here with [Docker](https://www.docker.com/)) :
+Pour pouvoir l'utiliser, il est nécessire de configurer un projet sur Google Console pour Google Analytics, 
+obtenir la clé json, puis configurer ce paquet en définissant son chemin. 
+
+## Google Console pour GA
+
+Google Console pour Google Analytics est disponible à l'adresse :
+https://console.developers.google.com/apis/
+
+Une fois connecté, il suffit de cliquer sur ** identifiants ** puis sur le bouton ** créer des identifiants ** :
+![identifiants](doc/API-Google-000.jpg)
+
+Il faut choisir un compte de service :
+![creer-un-compte-de-service](doc/API-Google-001.jpg)
+
+Il faut tout d'abord choisir l'option ** Nouveau compte de service ** et définir le compte. Ici, nous avons
+choisi comme nom : ** stats **
+
+Nous avons choisi comme role le profile ** Role viewer ** 
+
+L'Id du compte de service est ajouté automatiquement. Il correspond à l'adresse qu'il faudra utiliser dans Google Analytics.
+
+Il faut enfin choisir une clée au format json. Cette clée sera utilisée pour autoriser le serveur à se connecter 
+via l'API à Google Analytics.
+
+![creation-compte-de-service](doc/API-Google-002.jpg)
+ 
+Le fichier est téléchargée.
+![fichier-json](doc/API-Google-003.jpg)
+
+Le compte de service est créé.
+![compte-de-service](doc/API-Google-004.jpg)
+
+Une fois cette opération terminée, il faudra ** activer ** le service pour pouvoir l'utiliser depuis GA.
+![dashboard](doc/API-Google-005.jpg)
+ 
+## Google Analytics 
+
+L'application GA permet de configurer et suivre les indicateurs d'activité d'un site Internet. 
+Elle est disponible à l'adresse : https://analytics.google.com/analytics/web/
+
+Pour que l'accès déclaré dans Google Console fonctionne, il est obligatoire d'autoriser 
+l'accès avec l'adresse du compte de service. Pour cela, il suffit de cliquer sur le bouton ** Administration **
+![administration](doc/API-Google-006.jpg)
+
+et sur ** Gestion des utilisateurs ** pour ajouter une nouvelle autorisation.
+![gestion-des-utilisateurs](doc/API-Google-007.jpg)
+
+Dans la zone ** Ajouter des autorisations pour ** ajoutez l'adresse créée dans Google Console :
+stats-611@med.iam.gserviceaccount.com (ie. dans notre exemple).
+![autoriser-une-adresse](doc/API-Google-008.jpg)
+
+Pour vérifier si l'accès est correct, l'URL suivante permettra de tester le profil (ex id: 111111111):
 
 http://symfony.dev/app_dev.php/analytics-api/111111111 
 
 ![debug](doc/debug.png)
 
+
 # installation
 
-    composer require mediafigaro/google-analytics-api-symfony
+Il est possible d'installer le bundle depuis composer ou en clonnant le projet. 
+
+    composer require lhadjadj/google-analytics-api-symfony
+
     
-add to /app/AppKernel.php :
+Puis il faut ajouter la réference du bundle dans /app/AppKernel.php :
 
     $bundles = [
         ...
-        new MediaFigaro\GoogleAnalyticsApi\GoogleAnalyticsApi(),
+        new lhadjadj\GoogleAnalyticsApi\GoogleAnalyticsApi(),
     ];
 
 # configuration
