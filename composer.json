@@ -1,15 +1,19 @@
 {
-  "name": "mediafigaro/google-analytics-api-symfony",
+  "name": "lhadjadj/google-analytics-api-symfony",
   "type": "symfony-bundle",
   "description": "Google Analytics API v4 Symfony",
   "keywords": ["symfony","google","analytics","api","v4"],
-  "homepage": "https://github.com/mediafigaro/google-analytics-api-symfony",
+  "homepage": "https://github.com/lhadjadj/google-analytics-api-symfony",
   "license": "MIT",
   "authors": [
     {
       "name": "Kendrick"
+    },
+    {
+      "name": "LHadjadj"
     }
-  ],
+
+    ],
   "require": {
     "google/apiclient": "^2.0",
     "symfony/framework-bundle": ">=2.3",
@@ -21,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "MediaFigaro\\GoogleAnalyticsApi\\": "."
+      "LHadjadj\\GoogleAnalyticsApi\\": "."
     }
   }
 }
