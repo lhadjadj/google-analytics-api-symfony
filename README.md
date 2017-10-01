@@ -61,7 +61,7 @@ Le tableau ci-dessous liste les metrics et dimensions ajoutées :
 
 ## Principales modifications
 
-La classe GoogleAnalyticsService.php est enrichie d'une nouvelle méthode pour gérer
+La classe **GoogleAnalyticsService.php** est enrichie d'une nouvelle méthode pour gérer
 l'appel à une dimension/metric.
 ``` 
     private function getDimensionDataDateRange($viewId,$dateStart,$dateEnd,$metric,$dimension) {...}
@@ -73,7 +73,7 @@ Arguments:
 * $metric (nouveau) ;
 * $dimension (nouveau) ;
 
-Le controller GoogleUpdateController.php a été ajouté pour fournir deux services :
+Le controller **GoogleUpdateController.php** a été ajouté pour fournir deux services :
 * normal : pour la récupération des données à j-1;
 * batch  : pour la récupération des données depuis en date (par défaut : 2017-01-01) ;
 
@@ -98,6 +98,103 @@ Exemmple de traces.
     Date : 2017-01-04 -----> OK
     Date : 2017-01-05 -----> Enregistré
     Date : 2017-01-06 -----> Erreur
+
+
+## Ajout d'un modèle MongoDB
+le dossier Document a été ajouté avec la classe **GoogleAnalytics.php**. Elle
+ permet de mapper dans une Collection des données collectées depuis GA.
+
+le modèle est le suivant :
+````
+{ 
+    "_id" : ObjectId("xxxxxxxxxxxxxxxxxxxxxx"), 
+    "dateMesure" : "2017-09-30", 
+    "ip" : "xxx.xxx.xxx.xxx", 
+    "type" : "QUOTIDIEN", 
+    "visiteur" : NumberInt(2), 
+    "session" : NumberInt(2), 
+    "sessionDuration" : 0.0, 
+    "sessionsPerUser" : 1.0, 
+    "bounces" : NumberInt(2), 
+    "bounceRate" : 100.0, 
+    "avgTimeOnPage" : 0.0, 
+    "pageViewsPerSession" : 1.0, 
+    "percentNewVisits" : 100.0, 
+    "pageViews" : NumberInt(2), 
+    "uniquePageviews" : NumberInt(2), 
+    "avgPageLoadTime" : 0.0, 
+    "browser" : {
+        "0" : "browser", 
+        "1" : "sessions", 
+        "2" : [
+            NumberInt(0)
+        ], 
+        "3" : [
+            NumberInt(0)
+        ]
+    }, 
+    "operatingSystemDateRange" : {
+        "0" : "operatingSystem", 
+        "1" : "sessions", 
+        "2" : [
+            NumberInt(0)
+        ], 
+        "3" : [
+            NumberInt(0)
+        ]
+    }, 
+    "deviceCategory" : {
+        "0" : "deviceCategory", 
+        "1" : "sessions", 
+        "2" : [
+            NumberInt(0)
+        ], 
+        "3" : [
+            NumberInt(0)
+        ]
+    }, 
+    "country" : {
+        "0" : "country", 
+        "1" : "sessions", 
+        "2" : [
+            NumberInt(0)
+        ], 
+        "3" : [
+            NumberInt(0)
+        ]
+    }, 
+    "city" : {
+        "0" : "city", 
+        "1" : "sessions", 
+        "2" : [
+            NumberInt(0)
+        ], 
+        "3" : [
+            NumberInt(0)
+        ]
+    }, 
+    "month" : {
+        "0" : "month", 
+        "1" : "sessions", 
+        "2" : [
+            NumberInt(0)
+        ], 
+        "3" : [
+            NumberInt(0)
+        ]
+    }, 
+    "hour" : {
+        "0" : "hour", 
+        "1" : "sessions", 
+        "2" : [
+            NumberInt(0)
+        ], 
+        "3" : [
+            NumberInt(0)
+        ]
+    }
+}
+```` 
 
 
 # Utilisation
