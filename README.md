@@ -261,7 +261,7 @@ http://symfony.dev/app_dev.php/analytics-api/111111111
 ![debug](doc/debug.png)
 
 
-# installation
+# Installation
 
 Il est possible d'installer le bundle depuis composer ou en clonnant le projet. 
 ```
@@ -275,7 +275,7 @@ Puis il faut ajouter la réference du bundle dans /app/AppKernel.php :
         new lhadjadj\GoogleAnalyticsApi\GoogleAnalyticsApi(),
     ];
 ```
-# configuration
+# Configuration
 ```
     google_analytics_api.google_analytics_json_key
 ```
@@ -304,7 +304,7 @@ Et dans le fichier **config.yml**.
         google_analytics_json_key: "%google_analytics_json_key%"
 ```
         
-# Google Analytics API v4
+# Ressources Google Analytics API v4
 
 **Ressources utilises**
 
@@ -315,7 +315,7 @@ Et dans le fichier **config.yml**.
 * Generateur de requête : https://ga-dev-tools.appspot.com/query-explorer/
 
 
-# debug
+# Debug
 
 Pour activer le debug, il est nécessaire d'ajouter la route suivantes :
 
@@ -332,7 +332,7 @@ Le resultat de cette page est :
 
 ![debug](doc/debug.png)
 
-# erreurs
+# Erreurs
 
 En cas d'erreur 403, suivre le lien et authoriser l'accès à l'API v4.
 
